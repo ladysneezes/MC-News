@@ -19,7 +19,7 @@ class ArticlesList extends Component {
 
     return (
       <>
-        <select name="sort_by dropdown" onChange={this.handleSortChange}>
+        {/* <select name="sort_by dropdown" onChange={this.handleSortChange}>
           <option value="created_at">Date Created</option>
           <option value="comment_count">Comment Count</option>
           <option value="votes">Votes</option>
@@ -27,7 +27,29 @@ class ArticlesList extends Component {
         <select name="order dropdown" onChange={this.handleOrderChange}>
           <option value="desc">Descending</option>
           <option value="asc">Ascending</option>
-        </select>
+        </select> */}
+        <label>
+          Sort by:
+          <button value="created_at" onClick={this.handleSortChange}>
+            Date Created
+          </button>
+          <button value="comment_count" onClick={this.handleSortChange}>
+            Number of Comments
+          </button>
+          <button value="votes" onClick={this.handleSortChange}>
+            Votes
+          </button>
+        </label>
+        <br />
+        <label>
+          Order:
+          <button value="desc" onClick={this.handleOrderChange}>
+            Descending
+          </button>
+          <button value="asc" onClick={this.handleOrderChange}>
+            Ascending
+          </button>
+        </label>
         <ul>
           {articles.map(article => (
             <ArticleCard key={article.article_id} article={article} />
