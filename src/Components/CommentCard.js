@@ -12,12 +12,19 @@ const CommentCard = ({ comment, user, removeAComment }) => {
       <br />
       <p>Posted {distanceInWordsToNow(created_at, new Date())} ago</p>
       <Voter comment_id={comment_id} votes={votes} />
-      <DeleteButton
-        removeAComment={removeAComment}
-        comment_id={comment_id}
-        user={user}
-        author={author}
-      />
+      {user === author ? (
+        <>
+          <br />
+          <DeleteButton
+            removeAComment={removeAComment}
+            comment_id={comment_id}
+            user={user}
+            author={author}
+          />
+        </>
+      ) : (
+        <br />
+      )}
     </section>
   );
 };

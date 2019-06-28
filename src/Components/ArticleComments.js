@@ -12,7 +12,7 @@ class ArticleComments extends Component {
       <section>
         <Link to={`/articles/${this.props.article_id}`}>
           <button>
-            Hide Comments{" "}
+            Hide Comments
             <span role="img" aria-label="hide">
               ⬆️
             </span>
@@ -53,9 +53,7 @@ class ArticleComments extends Component {
         comment => comment.comment_id !== commentToRemoveId
       )
     });
-    api.deleteComment(commentToRemoveId).then(() => {
-      console.log("hi");
-    });
+    api.deleteComment(commentToRemoveId).catch();
   };
 }
 
