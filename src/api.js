@@ -1,8 +1,12 @@
 import axios from "axios";
 
+const connection = axios.create({
+  baseURL: "https://mikes-nc-news.herokuapp.com/api/"
+});
+
 export const getArticles = (topic, sort_by, order) => {
-  return axios
-    .get("https://mikes-nc-news.herokuapp.com/api/articles/", {
+  return connection
+    .get("articles/", {
       params: { topic: topic, sort_by: sort_by, order: order }
     })
     .then(res => {
@@ -10,34 +14,26 @@ export const getArticles = (topic, sort_by, order) => {
     });
 };
 export const getTopics = () => {
-  return axios
-    .get("https://mikes-nc-news.herokuapp.com/api/topics/")
-    .then(res => {
-      return res.data;
-    });
+  return connection.get("topics/").then(res => {
+    return res.data;
+  });
 };
 
 export const getArticleById = article_id => {
-  return axios
-    .get(`https://mikes-nc-news.herokuapp.com/api/articles/${article_id}`)
-    .then(res => {
-      return res.data.article;
-    });
+  return connection.get(`articles/${article_id}`).then(res => {
+    return res.data.article;
+  });
 };
 
 export const getArticleComments = article_id => {
-  return axios
-    .get(
-      `https://mikes-nc-news.herokuapp.com/api/articles/${article_id}/comments`
-    )
-    .then(res => {
-      return res.data.comments;
-    });
+  return connection.get(`articles/${article_id}/comments`).then(res => {
+    return res.data.comments;
+  });
 };
 
 export const patchArticleVotes = (article_id, increment) => {
-  return axios
-    .patch(`https://mikes-nc-news.herokuapp.com/api/articles/${article_id}`, {
+  return connection
+    .patch(`articles/${article_id}`, {
       inc_votes: increment
     })
     .then(({ data }) => {
@@ -46,8 +42,8 @@ export const patchArticleVotes = (article_id, increment) => {
 };
 
 export const patchCommentVotes = (comment_id, increment) => {
-  return axios
-    .patch(`https://mikes-nc-news.herokuapp.com/api/comments/${comment_id}`, {
+  return connection
+    .patch(`comments/${comment_id}`, {
       inc_votes: increment
     })
     .then(({ data }) => {
@@ -56,19 +52,19 @@ export const patchCommentVotes = (comment_id, increment) => {
 };
 
 export const postComment = (article_id, username, body) => {
-  return axios
-    .post(
-      `https://mikes-nc-news.herokuapp.com/api/articles/${article_id}/comments`,
-      { username: username, body: body }
-    )
+  return connection
+    .post(`articles/${article_id}/comments`, { username: username, body: body })
     .then(({ data }) => {
       return data.comment;
+    })
+    .catch(error => {
+      return error;
     });
 };
 
 export const postArticle = (username, title, body) => {
-  return axios
-    .post(`https://mikes-nc-news.herokuapp.com/api/articles/`, {
+  return connection
+    .post(`articles/`, {
       author: username,
       body: body,
       tite: title
@@ -82,9 +78,7 @@ export const postArticle = (username, title, body) => {
 };
 
 export const deleteComment = comment_id => {
-  return axios
-    .delete(`https://mikes-nc-news.herokuapp.com/api/comments/${+comment_id}`)
-    .catch(error => {
-      return error;
-    });
+  return connection.delete(`comments/${+comment_id}`).catch(error => {
+    return error;
+  });
 };
