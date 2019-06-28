@@ -14,7 +14,7 @@ class App extends React.Component {
     const { user } = this.state;
     return (
       <div className="App">
-        <Header />
+        <Header user={user} />
         <Router>
           <ArticleList path="/" />
           <ArticleInfo user={user} path="/articles/:article_id/*" />
