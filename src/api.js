@@ -13,8 +13,16 @@ export const getArticles = (topic, sort_by, order) => {
       return res.data;
     });
 };
+
 export const getTopics = () => {
   return connection.get("topics/").then(res => {
+    return res.data;
+  });
+};
+
+export const getUsers = () => {
+  return connection.get("users/").then(res => {
+    console.log("res.data :", res.data);
     return res.data;
   });
 };
