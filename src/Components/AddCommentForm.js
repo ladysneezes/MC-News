@@ -13,6 +13,7 @@ class AddCommentForm extends Component {
                 placeholder="What do you think?"
                 value={this.state.userInput}
                 onChange={this.handleInputChange}
+                required
               />
             </div>
           </div>
