@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "@reach/router";
 import Voter from "./Voter";
+import { distanceInWordsToNow } from "date-fns";
 
 const ArticleCard = ({ article }) => {
   return (
@@ -18,8 +19,13 @@ const ArticleCard = ({ article }) => {
               </span>
               <p>
                 Author: {article.author}
-                <br /> Topic: {article.topic} <br />
+                <br />
+                Topic: {article.topic}
+                <br />
                 Comment Count: {article.comment_count}
+                <br />
+                Posted {distanceInWordsToNow(article.created_at, new Date())}
+                ago
               </p>
             </div>
             <div className="card-action">
