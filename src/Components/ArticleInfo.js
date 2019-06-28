@@ -13,7 +13,7 @@ class ArticleInfo extends Component {
     const { user } = this.props;
     return (
       <section>
-        <ArticleCard article={this.state.article} />
+        <ArticleCard article={this.state.article} singleArticle={true} />
         <br />
 
         <p className="flow-text">{this.state.article.body}</p>

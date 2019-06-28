@@ -3,7 +3,7 @@ import { Link } from "@reach/router";
 import Voter from "./Voter";
 import { distanceInWordsToNow } from "date-fns";
 
-const ArticleCard = ({ article }) => {
+const ArticleCard = ({ article, singleArticle }) => {
   return (
     <section key={article.article_id}>
       <div className="row">
@@ -12,9 +12,13 @@ const ArticleCard = ({ article }) => {
             <div className="card-content blue-grey-text text-darken-4">
               <span className="card-title">
                 <h6>
-                  <Link to={`/articles/${article.article_id}`}>
-                    {article.title}
-                  </Link>
+                  {singleArticle ? (
+                    article.title
+                  ) : (
+                    <Link to={`/articles/${article.article_id}`}>
+                      {article.title}
+                    </Link>
+                  )}
                 </h6>
               </span>
               <p>
