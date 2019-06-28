@@ -19,15 +19,6 @@ class ArticlesList extends Component {
 
     return (
       <>
-        {/* <select name="sort_by dropdown" onChange={this.handleSortChange}>
-          <option value="created_at">Date Created</option>
-          <option value="comment_count">Comment Count</option>
-          <option value="votes">Votes</option>
-        </select>
-        <select name="order dropdown" onChange={this.handleOrderChange}>
-          <option value="desc">Descending</option>
-          <option value="asc">Ascending</option>
-        </select> */}
         <label>
           Sort by:
           <button value="created_at" onClick={this.handleSortChange}>
