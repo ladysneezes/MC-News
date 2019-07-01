@@ -4,20 +4,27 @@ import ArticleCard from "./ArticleCard";
 import { Router } from "@reach/router";
 import ArticleComments from "./ArticleComments";
 import ShowCommentsButton from "./ShowCommentsButton";
+import Error from "./Error";
 
 class ArticleInfo extends Component {
-  state = { article: {} };
+  state = { article: {}, error: null };
 
   render() {
     const { article_id } = this.state.article;
     const { user } = this.props;
+    const { error } = this.state;
+    if (error) {
+      return <Error error={error} />;
+    }
     return (
       <section>
         <ArticleCard article={this.state.article} singleArticle={true} />
         <br />
-
-        <p className="flow-text">{this.state.article.body}</p>
-
+        <div className="row">
+          <div className="col s12 m10 offset-m1">
+            <p className="flow-text left-align">{this.state.article.body}</p>
+          </div>
+        </div>
         <br />
 
         <Router>
@@ -33,9 +40,12 @@ class ArticleInfo extends Component {
   }
 
   componentDidMount = () => {
-    api.getArticleById(this.props.article_id).then(article => {
-      this.setState({ article });
-    });
+    api
+      .getArticleById(this.props.article_id)
+      .then(article => {
+        this.setState({ article });
+      })
+      .catch(error => this.setState({ error }));
   };
 }
 

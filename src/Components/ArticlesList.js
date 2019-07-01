@@ -19,18 +19,16 @@ class ArticlesList extends Component {
 
     return (
       <>
-        <label>
-          Sort by:
-          <button value="created_at" onClick={this.handleSortChange}>
-            Date Created
-          </button>
-          <button value="comment_count" onClick={this.handleSortChange}>
-            Number of Comments
-          </button>
-          <button value="votes" onClick={this.handleSortChange}>
-            Votes
-          </button>
-        </label>
+        Sort by:
+        <button value="created_at" onClick={this.handleSortChange}>
+          Date Created
+        </button>
+        <button value="comment_count" onClick={this.handleSortChange}>
+          Number of Comments
+        </button>
+        <button value="votes" onClick={this.handleSortChange}>
+          Votes
+        </button>
         <br />
         <label>
           Order:
