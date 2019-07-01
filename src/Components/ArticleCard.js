@@ -7,11 +7,11 @@ const ArticleCard = ({ article, singleArticle }) => {
   return (
     <section key={article.article_id}>
       <div className="row">
-        <div className="col s12 m12">
+        <div className="col s12 m10 offset-m1 ">
           <div className="card blue lighten-5">
             <div className="card-content blue-grey-text text-darken-4">
               <span className="card-title">
-                <h6>
+                <h4>
                   {singleArticle ? (
                     article.title
                   ) : (
@@ -19,21 +19,25 @@ const ArticleCard = ({ article, singleArticle }) => {
                       {article.title}
                     </Link>
                   )}
-                </h6>
+                </h4>
               </span>
               <p>
-                Author: {article.author}
+                {`Posted ${distanceInWordsToNow(
+                  article.created_at,
+                  new Date()
+                )} ago by ${article.author}`}
                 <br />
                 Topic: {article.topic}
                 <br />
                 Comment Count: {article.comment_count}
-                <br />
-                Posted {distanceInWordsToNow(article.created_at, new Date())}
-                ago
               </p>
             </div>
             <div className="card-action">
-              <Voter article_id={article.article_id} votes={article.votes} />
+              <Voter
+                article_id={article.article_id}
+                votes={article.votes}
+                isArticle={true}
+              />
             </div>
           </div>
         </div>

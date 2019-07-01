@@ -4,17 +4,15 @@ import * as api from "../api";
 class Voter extends Component {
   state = { voteChange: 0 };
   render() {
-    const { votes } = this.props;
+    const { votes, isArticle } = this.props;
     const { voteChange } = this.state;
     return (
       <>
-        <p
-          className="blue-grey-text text-darken-
-        
-        "
-        >
-          Votes:{votes + voteChange}
-        </p>
+        {isArticle ? (
+          <p className="black-text">Votes:{votes + voteChange}</p>
+        ) : (
+          <p className="white-text">Votes:{votes + voteChange}</p>
+        )}
         <button
           id="upvote"
           disabled={voteChange > 0}
