@@ -21,10 +21,12 @@ export const getTopics = () => {
 };
 
 export const getUsers = () => {
-  return connection.get("users/").then(res => {
-    console.log("res.data :", res.data);
-    return res.data;
-  });
+  return connection
+    .get("users/")
+    .then(res => {
+      return res.data;
+    })
+    .catch();
 };
 
 export const getArticleById = article_id => {
@@ -70,18 +72,19 @@ export const postComment = (article_id, username, body) => {
     });
 };
 
-export const postArticle = (username, title, body) => {
+export const postArticle = ({ author, title, body, topic }) => {
   return connection
     .post(`articles/`, {
-      author: username,
+      author: author,
       body: body,
-      tite: title
+      title: title,
+      topic: topic
     })
     .then(({ data }) => {
       return data.article;
     })
     .catch(error => {
-      console.dir(error); //still needs handling
+      return error; //still needs handling
     });
 };
 
