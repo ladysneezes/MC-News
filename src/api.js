@@ -4,10 +4,10 @@ const connection = axios.create({
   baseURL: "https://mikes-nc-news.herokuapp.com/api/"
 });
 
-export const getArticles = (topic, sort_by, order) => {
+export const getArticles = ({ topic, sort_by, order, username }) => {
   return connection
     .get("articles/", {
-      params: { topic: topic, sort_by: sort_by, order: order }
+      params: { topic: topic, sort_by: sort_by, order: order, author: username }
     })
     .then(res => {
       return res.data;

@@ -25,7 +25,8 @@ const ArticleCard = ({ article, singleArticle }) => {
                 {`Posted ${distanceInWordsToNow(
                   article.created_at,
                   new Date()
-                )} ago by ${article.author}`}
+                )} ago by `}
+                <Link to={`/users/${article.author}`}>{article.author}</Link>
                 <br />
                 Topic: {article.topic}
                 <br />

@@ -20,22 +20,42 @@ class ArticlesList extends Component {
     return (
       <>
         Sort by:
-        <button value="created_at" onClick={this.handleSortChange}>
+        <button
+          className="waves-effect waves-light btn"
+          value="created_at"
+          onClick={this.handleSortChange}
+        >
           Date Created
         </button>
-        <button value="comment_count" onClick={this.handleSortChange}>
+        <button
+          className="waves-effect waves-light btn"
+          value="comment_count"
+          onClick={this.handleSortChange}
+        >
           Number of Comments
         </button>
-        <button value="votes" onClick={this.handleSortChange}>
+        <button
+          className="waves-effect waves-light btn"
+          value="votes"
+          onClick={this.handleSortChange}
+        >
           Votes
         </button>
         <br />
         <label>
           Order:
-          <button value="desc" onClick={this.handleOrderChange}>
+          <button
+            className="waves-effect waves-light btn"
+            value="desc"
+            onClick={this.handleOrderChange}
+          >
             Descending
           </button>
-          <button value="asc" onClick={this.handleOrderChange}>
+          <button
+            className="waves-effect waves-light btn"
+            value="asc"
+            onClick={this.handleOrderChange}
+          >
             Ascending
           </button>
         </label>
@@ -74,7 +94,7 @@ class ArticlesList extends Component {
 
   fetchArticles = ({ slug, sort_by, order }) => {
     return api
-      .getArticles(slug, sort_by, order)
+      .getArticles({ slug, sort_by, order })
       .then(res => {
         this.setState({ articles: res.articles });
       })
