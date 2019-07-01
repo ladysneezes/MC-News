@@ -5,9 +5,9 @@ const UserCard = props => {
   return (
     <>
       <p>
-        Username:{username}
+        Username: {username}
         <br />
-        Name:{name}
+        Name: {name}
         <br />
         <img src={avatar_url} alt={`${username}'s avatar`} />
       </p>

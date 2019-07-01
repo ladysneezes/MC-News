@@ -15,6 +15,7 @@ class UsersList extends Component {
       </>
     );
   }
+
   componentDidMount = () => {
     this.fetchUsers();
   };

@@ -29,6 +29,15 @@ export const getUsers = () => {
     .catch();
 };
 
+export const getUser = username => {
+  return connection
+    .get(`users/${username}`)
+    .then(res => {
+      return res.data;
+    })
+    .catch();
+};
+
 export const getArticleById = article_id => {
   return connection.get(`articles/${article_id}`).then(res => {
     return res.data.article;
