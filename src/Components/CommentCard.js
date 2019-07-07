@@ -17,7 +17,6 @@ const CommentCard = ({ comment, user, removeAComment }) => {
                 Posted {distanceInWordsToNow(created_at, new Date())} ago by{" "}
                 {author}
               </p>
-              {/* <div className="col s12 m8 offset-m2" /> */}
               <Voter comment_id={comment_id} votes={votes} />
               <br />
               {user === author ? (
