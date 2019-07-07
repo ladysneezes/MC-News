@@ -31,7 +31,7 @@ class ArticleAdder extends Component {
           <label>
             Topic:
             {topics.map(topic => (
-              <p>
+              <p key={topic.slug}>
                 <label>
                   <input
                     name="topics_list"
@@ -45,12 +45,12 @@ class ArticleAdder extends Component {
             ))}
           </label>
           <button
-            class="btn waves-effect waves-light"
+            className="btn waves-effect waves-light"
             type="submit"
             name="action"
           >
             Submit
-            <i class="material-icons right">send</i>
+            <i className="material-icons right">send</i>
           </button>
         </form>
       </div>
