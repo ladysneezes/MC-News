@@ -27,7 +27,7 @@ class AddCommentForm extends Component {
           name="action"
         >
           Submit
-          <i class="material-icons right">send</i>
+          <i className="material-icons right">send</i>
         </button>
       </form>
     );
