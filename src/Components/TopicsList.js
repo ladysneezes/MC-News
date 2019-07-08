@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import * as api from "../api";
-import { Router } from "@reach/router";
-import ArticlesList from "./ArticlesList";
 import TopicCard from "./TopicCard";
 
 class TopicsList extends Component {
@@ -13,10 +11,6 @@ class TopicsList extends Component {
         {topics.map(topic => (
           <TopicCard topic={topic} key={topic.slug} />
         ))}
-
-        <Router>
-          <ArticlesList path=":slug" topic={`${this.props.slug}`} />
-        </Router>
       </>
     );
   }

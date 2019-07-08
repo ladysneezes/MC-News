@@ -9,6 +9,7 @@ import UsersList from "./Components/UsersList";
 import ArticleAdder from "./Components/ArticleAdder";
 import SingleUser from "./Components/SingleUser";
 import Error from "./Components/Error";
+import SingleTopic from "./Components/SingleTopic";
 
 class App extends React.Component {
   state = { user: "grumpy19" };
@@ -21,7 +22,8 @@ class App extends React.Component {
         <Router>
           <ArticleList path="/" />
           <ArticleInfo user={user} path="/articles/:article_id/*" />
-          <TopicsList path="/topics/*" />
+          <TopicsList path="/topics" />
+          <SingleTopic path="/topics/:slug" />
           <UsersList path="/users" />
           <SingleUser path="/users/:username" />
           <ArticleAdder path="/articles" author={user} />
