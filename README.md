@@ -1,14 +1,14 @@
 # MC News
 
-MC News is a Reddit style news aggregation application where users can post articles, vote on articles and upload comments.
+MC News is a Reddit style news aggregation application where users can post articles, vote on articles and upload comments. At the moment user accounts are not active and a hard coded user with full access has been provided for demo purposes.
 
 ---
 
-## Hosted
+## Hosted Links
 
 Front-End:
 
-- [Netlify - MC News]()
+- [Netlify - MC News](DEMO)
 - [Git repository](https://github.com/ladysneezes/MC-News)
 
 Back-end:
@@ -60,4 +60,4 @@ npm start
 
 ## Author
 
-Mike
+Mike Frank
