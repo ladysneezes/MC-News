@@ -60,7 +60,6 @@ class ArticleAdder extends Component {
   handleSubmit = event => {
     event.preventDefault();
     api.postArticle({ ...this.state, ...this.props }).then(article => {
-      //needs topic as well
       this.setState({ title: "", body: "", topic: "" });
       this.props.navigate(`/articles/${article.article_id}`);
     });
