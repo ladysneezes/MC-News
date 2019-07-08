@@ -1,6 +1,5 @@
 import React from "react";
 import Voter from "./Voter";
-import DeleteButton from "./DeleteButton";
 import { distanceInWordsToNow } from "date-fns";
 
 const CommentCard = ({ comment, user, removeAComment }) => {
@@ -21,12 +20,13 @@ const CommentCard = ({ comment, user, removeAComment }) => {
               <br />
               {user === author ? (
                 <>
-                  <DeleteButton
-                    removeAComment={removeAComment}
-                    comment_id={comment_id}
-                    user={user}
-                    author={author}
-                  />
+                  <button
+                    className="waves-effect waves-light btn delete-button"
+                    disabled={user !== author}
+                    onClick={() => removeAComment(comment_id)}
+                  >
+                    Delete
+                  </button>
                   <br />
                 </>
               ) : (
