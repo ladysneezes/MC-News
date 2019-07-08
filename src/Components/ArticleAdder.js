@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import * as api from "../api";
 
 class ArticleAdder extends Component {
-  state = { title: "", body: "", topic: "", topics: [] };
+  state = { title: "", body: "", topic: "", topics: [], loading: true };
   render() {
-    const { title, body, topics } = this.state;
-    return (
+    const { title, body, topics, loading } = this.state;
+    return loading === true ? (
+      <p>Loading...</p>
+    ) : (
       <div className="container">
         <form onSubmit={this.handleSubmit}>
           <label>
@@ -50,7 +52,6 @@ class ArticleAdder extends Component {
             name="action"
           >
             Submit
-            <i className="material-icons right">send</i>
           </button>
         </form>
       </div>
@@ -74,7 +75,7 @@ class ArticleAdder extends Component {
     api
       .getTopics()
       .then(res => {
-        this.setState({ topics: res.topics });
+        this.setState({ topics: res.topics, loading: false });
         return res.topics[0];
       })
       .then(topic => this.setState({ topic: topic.slug }));

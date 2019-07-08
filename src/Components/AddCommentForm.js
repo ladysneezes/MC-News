@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import * as api from "../api";
 
 class AddCommentForm extends Component {
-  state = { userInput: "" };
+  state = { userInput: "", loading: true };
   render() {
-    return (
+    const { loading } = this.state;
+    return loading === true ? (
+      <p>Loading...</p>
+    ) : (
       <form onSubmit={this.handleCommentFormSubmit}>
         <div className="container">
           <div className="row">
@@ -24,11 +27,14 @@ class AddCommentForm extends Component {
           name="action"
         >
           Submit
-          <i className="material-icons right">send</i>
         </button>
       </form>
     );
   }
+
+  componentDidMount = () => {
+    this.setState({ loading: false });
+  };
 
   handleCommentFormSubmit = event => {
     event.preventDefault();

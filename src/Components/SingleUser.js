@@ -5,17 +5,19 @@ import UserCard from "./UserCard";
 import Error from "./Error";
 
 class SingleUser extends Component {
-  state = { articles: [], error: null, user: {} };
+  state = { articles: [], error: null, user: {}, loading: true };
   render() {
-    const { articles, user, error } = this.state;
+    const { articles, user, error, loading } = this.state;
 
     if (error) {
       return <Error error={error} />;
     }
 
-    return (
+    return loading === true ? (
+      <p>Loading...</p>
+    ) : (
       <>
-        <UserCard user={user} />
+        <UserCard user={user} singleUser={true} />
         <ul>
           {articles.map(article => (
             <ArticleCard key={article.article_id} article={article} />
@@ -28,6 +30,7 @@ class SingleUser extends Component {
   componentDidMount = () => {
     this.fetchUser(this.props.username);
     this.fetchArticlesByUsername(this.props.username);
+    this.setState({ loading: false });
   };
 
   fetchUser = username => {

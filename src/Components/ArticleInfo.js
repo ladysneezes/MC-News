@@ -7,16 +7,19 @@ import ShowCommentsButton from "./ShowCommentsButton";
 import Error from "./Error";
 
 class ArticleInfo extends Component {
-  state = { article: {}, error: null };
+  state = { article: {}, error: null, loading: true };
 
   render() {
     const { article_id } = this.state.article;
     const { user } = this.props;
-    const { error } = this.state;
+    const { error, loading } = this.state;
     if (error) {
       return <Error error={error} />;
     }
-    return (
+
+    return loading === true ? (
+      <p>Loading...</p>
+    ) : (
       <section>
         <ArticleCard article={this.state.article} singleArticle={true} />
         <br />
@@ -43,7 +46,7 @@ class ArticleInfo extends Component {
     api
       .getArticleById(this.props.article_id)
       .then(article => {
-        this.setState({ article });
+        this.setState({ article, loading: false });
       })
       .catch(error => this.setState({ error }));
   };

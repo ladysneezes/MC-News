@@ -5,13 +5,16 @@ import { Link } from "@reach/router";
 import AddCommentForm from "./AddCommentForm";
 
 class ArticleComments extends Component {
-  state = { comments: [] };
+  state = { comments: [], loading: true };
   render() {
     const { user, article_id } = this.props;
-    return (
+    const { loading } = this.state;
+    return loading === true ? (
+      <p>Loading...</p>
+    ) : (
       <section>
         <Link to={`/articles/${this.props.article_id}`}>
-          <button>
+          <button className="waves-effect waves-light btn hide-button">
             Hide Comments
             <span role="img" aria-label="hide">
               ⬆️
@@ -37,11 +40,16 @@ class ArticleComments extends Component {
       </section>
     );
   }
+
   componentDidMount = () => {
     api.getArticleComments(this.props.article_id).then(comments => {
-      this.setState({ comments });
+      this.setState({ comments, loading: false });
     });
   };
+
+  // componentDidUpdate = () => {
+  //   handleTopicChange();
+  // };
 
   addAComment = comment => {
     this.setState({ comments: [comment, ...this.state.comments] });

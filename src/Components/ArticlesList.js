@@ -8,51 +8,56 @@ class ArticlesList extends Component {
     articles: [],
     error: null,
     sort_by: null,
-    order: null
+    order: null,
+    loading: true
   };
 
   render() {
-    const { articles, error } = this.state;
+    const { articles, error, loading } = this.state;
     if (error) {
       return <Error error={error} />;
     }
 
-    return (
+    return loading === true ? (
+      <p>Loading...</p>
+    ) : (
       <>
-        Sort by:
-        <button
-          className="waves-effect waves-light btn"
-          value="created_at"
-          onClick={this.handleSortChange}
-        >
-          Date Created
-        </button>
-        <button
-          className="waves-effect waves-light btn"
-          value="comment_count"
-          onClick={this.handleSortChange}
-        >
-          Number of Comments
-        </button>
-        <button
-          className="waves-effect waves-light btn"
-          value="votes"
-          onClick={this.handleSortChange}
-        >
-          Votes
-        </button>
+        <label>
+          Sort by:
+          <button
+            className="waves-effect waves-light btn sort-buttons"
+            value="created_at"
+            onClick={this.handleSortChange}
+          >
+            Date Created
+          </button>
+          <button
+            className="waves-effect waves-light btn sort-buttons"
+            value="comment_count"
+            onClick={this.handleSortChange}
+          >
+            Number of Comments
+          </button>
+          <button
+            className="waves-effect waves-light btn sort-buttons"
+            value="votes"
+            onClick={this.handleSortChange}
+          >
+            Votes
+          </button>
+        </label>
         <br />
         <label>
           Order:
           <button
-            className="waves-effect waves-light btn"
+            className="waves-effect waves-light btn sort-buttons"
             value="desc"
             onClick={this.handleOrderChange}
           >
             Descending
           </button>
           <button
-            className="waves-effect waves-light btn"
+            className="waves-effect waves-light btn sort-buttons"
             value="asc"
             onClick={this.handleOrderChange}
           >
@@ -71,6 +76,7 @@ class ArticlesList extends Component {
 
   componentDidMount = () => {
     this.fetchArticles({ ...this.props, ...this.state });
+    this.setState({ loading: false });
   };
 
   componentDidUpdate = (prevProps, prevState) => {
