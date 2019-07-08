@@ -5,7 +5,7 @@ const ShowCommentsButton = props => {
   let { article_id } = props;
   return (
     <Link to={`/articles/${article_id}/comments`}>
-      <button>
+      <button className="waves-effect waves-light btn show-button">
         Show/Add comments
         <span role="img" aria-label="show">
           ⬇️
