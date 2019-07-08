@@ -4,20 +4,24 @@ const connection = axios.create({
   baseURL: "https://mikes-nc-news.herokuapp.com/api/"
 });
 
-export const getArticles = ({ topic, sort_by, order, username }) => {
+export const getArticles = ({ slug, sort_by, order, username }) => {
   return connection
     .get("articles/", {
-      params: { topic: topic, sort_by: sort_by, order: order, author: username }
+      params: { topic: slug, sort_by: sort_by, order: order, author: username }
     })
     .then(res => {
       return res.data;
-    });
+    })
+    .catch();
 };
 
 export const getTopics = () => {
-  return connection.get("topics/").then(res => {
-    return res.data;
-  });
+  return connection
+    .get("topics/")
+    .then(res => {
+      return res.data;
+    })
+    .catch();
 };
 
 export const getUsers = () => {
@@ -39,15 +43,21 @@ export const getUser = username => {
 };
 
 export const getArticleById = article_id => {
-  return connection.get(`articles/${article_id}`).then(res => {
-    return res.data.article;
-  });
+  return connection
+    .get(`articles/${article_id}`)
+    .then(res => {
+      return res.data.article;
+    })
+    .catch();
 };
 
 export const getArticleComments = article_id => {
-  return connection.get(`articles/${article_id}/comments`).then(res => {
-    return res.data.comments;
-  });
+  return connection
+    .get(`articles/${article_id}/comments`)
+    .then(res => {
+      return res.data.comments;
+    })
+    .catch();
 };
 
 export const patchArticleVotes = (article_id, increment) => {
@@ -57,7 +67,8 @@ export const patchArticleVotes = (article_id, increment) => {
     })
     .then(({ data }) => {
       return data.article;
-    });
+    })
+    .catch();
 };
 
 export const patchCommentVotes = (comment_id, increment) => {
@@ -67,7 +78,8 @@ export const patchCommentVotes = (comment_id, increment) => {
     })
     .then(({ data }) => {
       return data.comment;
-    });
+    })
+    .catch();
 };
 
 export const postComment = (article_id, username, body) => {
@@ -78,7 +90,8 @@ export const postComment = (article_id, username, body) => {
     })
     .catch(error => {
       return error;
-    });
+    })
+    .catch();
 };
 
 export const postArticle = ({ author, title, body, topic }) => {
