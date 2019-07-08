@@ -8,6 +8,7 @@ import TopicsList from "./Components/TopicsList";
 import UsersList from "./Components/UsersList";
 import ArticleAdder from "./Components/ArticleAdder";
 import SingleUser from "./Components/SingleUser";
+import Error from "./Components/Error";
 
 class App extends React.Component {
   state = { user: "grumpy19" };
@@ -24,6 +25,7 @@ class App extends React.Component {
           <UsersList path="/users" />
           <SingleUser path="/users/:username" />
           <ArticleAdder path="/articles" author={user} />
+          <Error default />
         </Router>
       </div>
     );
