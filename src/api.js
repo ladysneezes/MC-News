@@ -10,54 +10,39 @@ export const getArticles = ({ slug, sort_by, order, username }) => {
       params: { topic: slug, sort_by: sort_by, order: order, author: username }
     })
     .then(res => {
+      console.log("res.data :", res.data);
       return res.data;
-    })
-    .catch();
+    });
 };
 
 export const getTopics = () => {
-  return connection
-    .get("topics/")
-    .then(res => {
-      return res.data;
-    })
-    .catch();
+  return connection.get("topics/").then(res => {
+    return res.data;
+  });
 };
 
 export const getUsers = () => {
-  return connection
-    .get("users/")
-    .then(res => {
-      return res.data;
-    })
-    .catch();
+  return connection.get("users/").then(res => {
+    return res.data;
+  });
 };
 
 export const getUser = username => {
-  return connection
-    .get(`users/${username}`)
-    .then(res => {
-      return res.data;
-    })
-    .catch();
+  return connection.get(`users/${username}`).then(res => {
+    return res.data;
+  });
 };
 
 export const getArticleById = article_id => {
-  return connection
-    .get(`articles/${article_id}`)
-    .then(res => {
-      return res.data.article;
-    })
-    .catch();
+  return connection.get(`articles/${article_id}`).then(res => {
+    return res.data.article;
+  });
 };
 
 export const getArticleComments = article_id => {
-  return connection
-    .get(`articles/${article_id}/comments`)
-    .then(res => {
-      return res.data.comments;
-    })
-    .catch();
+  return connection.get(`articles/${article_id}/comments`).then(res => {
+    return res.data.comments;
+  });
 };
 
 export const patchArticleVotes = (article_id, increment) => {
@@ -67,8 +52,7 @@ export const patchArticleVotes = (article_id, increment) => {
     })
     .then(({ data }) => {
       return data.article;
-    })
-    .catch();
+    });
 };
 
 export const patchCommentVotes = (comment_id, increment) => {
@@ -78,8 +62,7 @@ export const patchCommentVotes = (comment_id, increment) => {
     })
     .then(({ data }) => {
       return data.comment;
-    })
-    .catch();
+    });
 };
 
 export const postComment = (article_id, username, body) => {
@@ -90,8 +73,7 @@ export const postComment = (article_id, username, body) => {
     })
     .catch(error => {
       return error;
-    })
-    .catch();
+    });
 };
 
 export const postArticle = ({ author, title, body, topic }) => {
@@ -104,14 +86,9 @@ export const postArticle = ({ author, title, body, topic }) => {
     })
     .then(({ data }) => {
       return data.article;
-    })
-    .catch(error => {
-      return error; //still needs handling
     });
 };
 
 export const deleteComment = comment_id => {
-  return connection.delete(`comments/${+comment_id}`).catch(error => {
-    return error;
-  });
+  return connection.delete(`comments/${+comment_id}`);
 };
