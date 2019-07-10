@@ -13,6 +13,7 @@ class ArticleInfo extends Component {
     const { article_id } = this.state.article;
     const { user } = this.props;
     const { error, loading } = this.state;
+
     if (error) {
       return <Error error={error} />;
     }

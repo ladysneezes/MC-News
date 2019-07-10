@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import * as api from "../api";
 
 class Voter extends Component {
-  state = { voteChange: 0, loading: true };
+  state = { voteChange: 0, loading: true, error: null };
   render() {
     const { votes, isArticle } = this.props;
     const { voteChange, loading } = this.state;
+
     return loading === true ? (
       <p>Loading...</p>
     ) : (

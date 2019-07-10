@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import UserCard from "./UserCard";
 import * as api from "../api";
+import Error from "./Error";
 
 class UsersList extends Component {
   state = { users: [], error: null, loading: true };
 
   render() {
-    const { users, loading } = this.state;
+    const { users, loading, error } = this.state;
+
+    if (error) return <Error error={error} />;
+
     return loading === true ? (
       <p>Loading...</p>
     ) : (

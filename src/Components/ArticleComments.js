@@ -3,12 +3,16 @@ import * as api from "../api";
 import CommentCard from "./CommentCard";
 import { Link } from "@reach/router";
 import AddCommentForm from "./AddCommentForm";
+import Error from "./Error";
 
 class ArticleComments extends Component {
   state = { comments: [], loading: true };
   render() {
     const { user, article_id } = this.props;
-    const { loading } = this.state;
+    const { loading, error } = this.state;
+
+    if (error) return <Error error={error} />;
+
     return loading === true ? (
       <p>Loading...</p>
     ) : (
@@ -42,14 +46,13 @@ class ArticleComments extends Component {
   }
 
   componentDidMount = () => {
-    api.getArticleComments(this.props.article_id).then(comments => {
-      this.setState({ comments, loading: false });
-    });
+    api
+      .getArticleComments(this.props.article_id)
+      .then(comments => {
+        this.setState({ comments, loading: false });
+      })
+      .catch(error => this.setState({ error }));
   };
-
-  // componentDidUpdate = () => {
-  //   handleTopicChange();
-  // };
 
   addAComment = comment => {
     this.setState({ comments: [comment, ...this.state.comments] });
@@ -61,7 +64,9 @@ class ArticleComments extends Component {
         comment => comment.comment_id !== commentToRemoveId
       )
     });
-    api.deleteComment(commentToRemoveId).catch();
+    api
+      .deleteComment(commentToRemoveId)
+      .catch(error => this.setState({ error }));
   };
 }
 

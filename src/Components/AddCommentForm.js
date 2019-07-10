@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import * as api from "../api";
+import Error from "./Error";
 
 class AddCommentForm extends Component {
   state = { userInput: "", loading: true };
   render() {
-    const { loading } = this.state;
+    const { loading, error } = this.state;
+
+    if (error) return <Error error={error} />;
+
     return loading === true ? (
       <p>Loading...</p>
     ) : (
@@ -42,10 +46,13 @@ class AddCommentForm extends Component {
     const { user, article_id, addAComment } = this.props;
     const body = this.state.userInput;
 
-    api.postComment(article_id, user, body).then(comment => {
-      addAComment(comment);
-      this.setState({ userInput: "" });
-    });
+    api
+      .postComment(article_id, user, body)
+      .then(comment => {
+        addAComment(comment);
+        this.setState({ userInput: "" });
+      })
+      .catch(error => this.setState({ error }));
   };
 
   handleInputChange = event => {

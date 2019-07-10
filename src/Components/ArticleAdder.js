@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import * as api from "../api";
+import Error from "./Error";
 
 class ArticleAdder extends Component {
   state = { title: "", body: "", topic: "", topics: [], loading: true };
   render() {
-    const { title, body, topics, loading } = this.state;
+    const { title, body, topics, loading, error } = this.state;
+
+    if (error) return <Error error={error} />;
+
     return loading === true ? (
       <p>Loading...</p>
     ) : (
@@ -61,10 +65,13 @@ class ArticleAdder extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    api.postArticle({ ...this.state, ...this.props }).then(article => {
-      this.setState({ title: "", body: "", topic: "" });
-      this.props.navigate(`/articles/${article.article_id}`);
-    });
+    api
+      .postArticle({ ...this.state, ...this.props })
+      .then(article => {
+        this.setState({ title: "", body: "", topic: "" });
+        this.props.navigate(`/articles/${article.article_id}`);
+      })
+      .catch(error => this.setState({ error }));
   };
 
   handleChange = event => {
