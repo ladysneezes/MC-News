@@ -8,7 +8,7 @@ MC News is a Reddit style news aggregation application where users can post arti
 
 Front-End:
 
-- [Netlify - MC News](DEMO)
+- [Netlify - MC News](https://mcnews.netlify.com)
 - [Git repository](https://github.com/ladysneezes/MC-News)
 
 Back-end:
@@ -51,7 +51,7 @@ npm install
 npm start
 ```
 
-6. To stop running the server use ctrl + c
+5. To stop running the server use ctrl + c
 
 ## Built with
 
