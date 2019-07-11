@@ -10,7 +10,6 @@ export const getArticles = ({ slug, sort_by, order, username }) => {
       params: { topic: slug, sort_by: sort_by, order: order, author: username }
     })
     .then(res => {
-      console.log("res.data :", res.data);
       return res.data;
     });
 };
