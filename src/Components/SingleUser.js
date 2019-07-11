@@ -28,26 +28,27 @@ class SingleUser extends Component {
   }
 
   componentDidMount = () => {
-    this.fetchUser(this.props.username);
-    this.fetchArticlesByUsername(this.props.username);
-    this.setState({ loading: false });
+    Promise.all([
+      this.fetchUser(this.props.username),
+      this.fetchArticlesByUsername(this.props.username)
+    ]).then(responses => {
+      return this.setState({
+        loading: false,
+        user: responses[0].user,
+        articles: responses[1].articles
+      });
+    });
   };
 
   fetchUser = username => {
-    return api
-      .getUser(username)
-      .then(res => {
-        this.setState({ user: res.user });
-      })
-      .catch(error => {
-        this.setState({ error });
-      });
+    return api.getUser(username).catch(error => {
+      this.setState({ error });
+    });
   };
 
   fetchArticlesByUsername = username => {
-    api
-      .getArticles({ username })
-      .then(res => this.setState({ articles: res.articles }))
+    return api
+      .getArticles({ username: username })
       .catch(error => this.setState({ error }));
   };
 }
