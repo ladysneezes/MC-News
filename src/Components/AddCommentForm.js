@@ -3,15 +3,13 @@ import * as api from "../api";
 import Error from "./Error";
 
 class AddCommentForm extends Component {
-  state = { userInput: "", loading: true };
+  state = { userInput: "" };
   render() {
-    const { loading, error } = this.state;
+    const { error } = this.state;
 
     if (error) return <Error error={error} />;
 
-    return loading === true ? (
-      <p>Loading...</p>
-    ) : (
+    return (
       <form onSubmit={this.handleCommentFormSubmit}>
         <div className="container">
           <div className="row">
@@ -36,10 +34,6 @@ class AddCommentForm extends Component {
       </form>
     );
   }
-
-  componentDidMount = () => {
-    this.setState({ loading: false });
-  };
 
   handleCommentFormSubmit = event => {
     event.preventDefault();

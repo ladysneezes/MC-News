@@ -5,13 +5,11 @@ import Error from "./Error";
 class ArticleAdder extends Component {
   state = { title: "", body: "", topic: "", topics: [], loading: true };
   render() {
-    const { title, body, topics, loading, error } = this.state;
+    const { title, body, topics, error } = this.state;
 
     if (error) return <Error error={error} />;
 
-    return loading === true ? (
-      <p>Loading...</p>
-    ) : (
+    return (
       <div className="container">
         <form onSubmit={this.handleSubmit}>
           <label>
@@ -83,10 +81,11 @@ class ArticleAdder extends Component {
     api
       .getTopics()
       .then(res => {
-        this.setState({ topics: res.topics, loading: false });
+        this.setState({ topics: res.topics });
         return res.topics[0];
       })
-      .then(topic => this.setState({ topic: topic.slug }));
+      .then(topic => this.setState({ topic: topic.slug }))
+      .then(() => this.setState({ loading: false }));
   };
 }
 

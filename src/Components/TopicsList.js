@@ -3,10 +3,13 @@ import * as api from "../api";
 import TopicCard from "./TopicCard";
 
 class TopicsList extends Component {
-  state = { topics: [] };
+  state = { topics: [], loading: true };
   render() {
-    const { topics } = this.state;
-    return (
+    const { topics, loading } = this.state;
+
+    return loading ? (
+      <p>Loading...</p>
+    ) : (
       <>
         {topics.map(topic => (
           <TopicCard topic={topic} key={topic.slug} />
@@ -16,7 +19,7 @@ class TopicsList extends Component {
   }
   componentDidMount = () => {
     api.getTopics().then(res => {
-      this.setState({ topics: res.topics });
+      this.setState({ topics: res.topics, loading: false });
     });
   };
 }

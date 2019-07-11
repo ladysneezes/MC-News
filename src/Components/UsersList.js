@@ -23,8 +23,9 @@ class UsersList extends Component {
   }
 
   componentDidMount = () => {
-    this.fetchUsers();
-    this.setState({ loading: false });
+    this.fetchUsers().then(() => {
+      this.setState({ loading: false });
+    });
   };
 
   fetchUsers = () => {

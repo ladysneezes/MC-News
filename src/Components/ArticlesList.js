@@ -75,8 +75,9 @@ class ArticlesList extends Component {
   }
 
   componentDidMount = () => {
-    this.fetchArticles({ ...this.props, ...this.state });
-    this.setState({ loading: false });
+    this.fetchArticles({ ...this.props, ...this.state }).then(() =>
+      this.setState({ loading: false })
+    );
   };
 
   componentDidUpdate = (prevProps, prevState) => {
